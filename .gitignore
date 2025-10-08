@@ -37,6 +37,4 @@ yarn-error.log*
 # vercel
 .vercel
 
-# mkdocs build output
-/site/
 
