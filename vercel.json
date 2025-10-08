@@ -1,14 +1,10 @@
 {
-    "builds": [
-      {
-        "src": "mkdocs.yml",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "site"
-        }
-      }
-    ],
     "buildCommand": "pip install -r requirements.txt && mkdocs build",
-    "outputDirectory": "site"
-}
+    "outputDirectory": "site",
+    "framework": null,
+    "ignoreCommand": "git diff --quiet HEAD^ HEAD mkdocs.yml docs/ requirements.txt",
+    "github": {
+      "silent": true
+    }
+  }
   
