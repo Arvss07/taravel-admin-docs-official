@@ -23,26 +23,31 @@
   <script>
     // Add custom functionality here
     document.addEventListener('DOMContentLoaded', function() {
-      // Add copy buttons to code blocks
+      // Add copy buttons to code blocks, but skip Mermaid to avoid rendering artifacts like "ECopy/CCopy"
       const codeBlocks = document.querySelectorAll('pre code');
       codeBlocks.forEach(function(block) {
+        // Skip mermaid code blocks and already-processed blocks
+        if (block.classList.contains('language-mermaid')) return;
+        if (block.closest('.mermaid')) return;
+        if (block.closest('pre')?.querySelector('.copy-code-button')) return;
+
         const button = document.createElement('button');
         button.className = 'copy-code-button';
         button.innerHTML = 'Copy';
         // Styling is handled by CSS class .copy-code-button
-        
+
         const pre = block.parentElement;
         pre.style.position = 'relative';
         pre.appendChild(button);
-        
+
         pre.addEventListener('mouseenter', function() {
           button.style.opacity = '1';
         });
-        
+
         pre.addEventListener('mouseleave', function() {
           button.style.opacity = '0';
         });
-        
+
         button.addEventListener('click', function() {
           navigator.clipboard.writeText(block.textContent).then(function() {
             button.innerHTML = 'Copied!';

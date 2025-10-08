@@ -166,4 +166,4 @@ graph TB
 
 ---
 
-*Next: Learn about [User Management](user-management.md) features.*
+*Next: Learn about [ID Verification](id-verification.md) features.*
