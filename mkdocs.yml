@@ -146,10 +146,10 @@ nav:
     - Tech Stack: architecture/tech-stack.md
   - Core Features:
     - Dashboard: features/dashboard.md
-    - User Management: features/user-management.md
-    - Account Management: features/account-management.md
-    - Vehicle Management: features/vehicle-management.md
     - ID Verification: features/id-verification.md
+    - Vehicle Management: features/vehicle-management.md
+    - Account Management: features/account-management.md
+    - User Management: features/user-management.md
     - System Logs: features/system-logs.md
   - Contact Us:
     - Contact Us: contact-us/contact-us.md
