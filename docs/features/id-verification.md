@@ -334,4 +334,4 @@ graph TB
 
 ---
 
-*Next: Learn about [Vehicle Configuration](vehicle-configuration.md) features.*
+*Next: Learn about [Vehicle Configuration](vehicle-management.md) features.*
