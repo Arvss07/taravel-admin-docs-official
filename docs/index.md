@@ -30,9 +30,9 @@
 
     ---
 
-    Common issues and solutions
+    Contact us for any questions or support
 
-    [:octicons-arrow-right-24: Troubleshooting](troubleshooting/common-issues.md)
+    [:octicons-arrow-right-24: Contact Us](contact-us/contact-us.md)
 
 </div>
 

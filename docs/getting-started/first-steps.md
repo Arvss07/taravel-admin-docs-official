@@ -123,7 +123,6 @@ Now that you're familiar with the basics:
 
 If you encounter issues:
 
-- Check the [Troubleshooting Guide](../troubleshooting/common-issues.md)
 - Review the [Architecture Documentation](../architecture/system-overview.md)
 - Contact the development team
 - Open an issue on GitHub

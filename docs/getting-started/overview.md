@@ -124,12 +124,10 @@ Once you have a basic understanding of the system:
 3. **Explore the architecture** in the [Architecture section](../architecture/system-overview.md)
 4. **Learn about core features** in the [Features section](../features/dashboard.md)
 
+
 ## Support
 
 If you need help getting started:
-
-- Check the [Troubleshooting Guide](../troubleshooting/common-issues.md)
-- Review the [FAQ section](../appendix/glossary.md)
 - Contact the development team
 - Open an issue on GitHub
 

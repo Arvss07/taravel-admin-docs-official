@@ -223,16 +223,6 @@ cat .env.local
 # Check for any syntax errors in environment variables
 ```
 
-### Getting Help
-
-If you encounter issues during installation:
-
-1. Check the [Troubleshooting Guide](../troubleshooting/common-issues.md)
-2. Open an issue on GitHub with:
-   - Your operating system
-   - Node.js version
-   - Error messages
-   - Steps you've already tried
 
 ## Next Steps
 

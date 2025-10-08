@@ -1,0 +1,191 @@
+<!-- Custom Footer Template -->
+<footer class="md-footer">
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      
+      <!-- Contact Information Section -->
+      <div class="md-footer-contact">
+        <div class="md-footer-contact__content">
+          <h4 class="md-footer-contact__title">Get In Touch</h4>
+          <div class="md-footer-contact__channels">
+            
+            <!-- Facebook Messenger -->
+            <div class="md-footer-contact__channel">
+              <a 
+                href="https://m.me/782638274929840" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="md-footer-contact__link"
+                aria-label="Contact us via Facebook Messenger"
+              >
+                <i class="fab fa-facebook-messenger"></i>
+                <span>Facebook Messenger</span>
+              </a>
+            </div>
+            
+            <!-- Email -->
+            <div class="md-footer-contact__channel">
+              <a 
+                href="mailto:taravelofficial.ph@gmail.com"
+                class="md-footer-contact__link"
+                aria-label="Send us an email"
+              >
+                <i class="fas fa-envelope"></i>
+                <span>taravelofficial.ph@gmail.com</span>
+              </a>
+            </div>
+            
+            <!-- Phone -->
+            <div class="md-footer-contact__channel">
+              <a 
+                href="tel:+639052327405"
+                class="md-footer-contact__link"
+                aria-label="Call us"
+              >
+                <i class="fas fa-phone"></i>
+                <span>+63 905 232 7405</span>
+              </a>
+            </div>
+            
+            <!-- Facebook Page -->
+            <div class="md-footer-contact__channel">
+              <a 
+                href="https://www.facebook.com/share/17DB8fhPL9/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="md-footer-contact__link"
+                aria-label="Visit our Facebook page"
+              >
+                <i class="fab fa-facebook"></i>
+                <span>Facebook Page</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Copyright Section -->
+      <div class="md-footer-copyright">
+        {% if config.copyright %}
+          <div class="md-footer-copyright__highlight">
+            {{ config.copyright }}
+          </div>
+        {% endif %}
+        
+        <!-- Made with Material for MkDocs -->
+        <div class="md-footer-made">
+          Made with
+          <a 
+            href="https://squidfunk.github.io/mkdocs-material/" 
+            target="_blank" 
+            rel="noopener"
+          >
+            Material for MkDocs
+          </a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+<!-- Custom Footer Styles -->
+<style>
+  .md-footer-contact {
+    margin-bottom: 1rem;
+  }
+  
+  .md-footer-contact__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--md-primary-fg-color);
+  }
+  
+  .md-footer-contact__channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .md-footer-contact__channel {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .md-footer-contact__link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--md-typeset-color);
+  }
+  
+  .md-footer-contact__link:hover {
+    background-color: var(--md-primary-fg-color--light);
+    color: var(--md-primary-bg-color);
+    transform: translateY(-2px);
+  }
+  
+  .md-footer-contact__link i {
+    font-size: 1.2rem;
+    width: 1.5rem;
+    text-align: center;
+  }
+  
+  .md-footer-contact__link i.fa-facebook-messenger {
+    color: #0084ff;
+  }
+  
+  .md-footer-contact__link i.fa-envelope {
+    color: #10b981;
+  }
+  
+  .md-footer-contact__link i.fa-phone {
+    color: #8b5cf6;
+  }
+  
+  .md-footer-contact__link i.fa-facebook {
+    color: #1877f2;
+  }
+  
+  .md-footer-copyright {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .md-footer-copyright__highlight {
+    font-weight: 500;
+  }
+  
+  .md-footer-made {
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+  
+  .md-footer-made a {
+    color: var(--md-primary-fg-color);
+    text-decoration: none;
+  }
+  
+  .md-footer-made a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .md-footer-contact__channels {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .md-footer-contact__channel {
+      min-width: auto;
+    }
+  }
+</style>
