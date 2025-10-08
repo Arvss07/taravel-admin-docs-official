@@ -1,6 +1,6 @@
-site_name: Tara-Vel Admin Documentation
-site_description: Comprehensive technical documentation for the Tara-Vel Admin Dashboard
-site_author: Tara-Vel Development Team
+site_name: Tara-vel Admin Documentation
+site_description: Comprehensive technical documentation for the Tara-vel Admin Dashboard
+site_author: Tara-vel Development Team
 site_url: https://docs.taravel.app
 
 # Repository
@@ -8,7 +8,7 @@ repo_name: taravel-admin-docs-official
 repo_url: https://github.com/Arvss07/tataravel-admin-docs-official
 
 # Copyright
-copyright: Copyright &copy; 2025 Tara-Vel Development Team
+copyright: Copyright &copy; 2025 Tara-vel Development Team
 
 theme:
   name: material
@@ -153,4 +153,3 @@ nav:
     - System Logs: features/system-logs.md
   - Contact Us:
     - Contact Us: contact-us/contact-us.md
-    
