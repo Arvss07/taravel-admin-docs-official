@@ -73,7 +73,7 @@ The system supports three main types of identification documents:
 - **Filter**: Filter by status, ID type, etc.
 - **Sorting**: Supported sorting by timestamp, updated date, expiration date, or ID number
 - **Order**: Ascending or descending
-- **Caching**: Query cache for performance optimization
+- **Caching**: TanStack Query cache for performance optimization
 
 #### Individual Verification Details
 - **Modal View**: Detailed verification information
@@ -114,7 +114,7 @@ The system supports three main types of identification documents:
 
 #### Search Implementation
 - **Client-Side Filtering**: Real-time search results
-- **Performance**: Optimized for large datasets
+- **Performance**: Optimized for large datasets with TanStack Query
 - **Caching**: Search results cached for performance
 - **Debouncing**: Prevents excessive API calls
 
@@ -289,8 +289,9 @@ graph TB
 
 #### Performance Optimization
 - **Use Pagination** - Navigate through results efficiently
-- **Clear Cache** - Refresh data when needed
+- **Clear Cache** - Refresh TanStack Query cache when needed
 - **Monitor System** - Check for expired verifications regularly
+- **Query Optimization** - Use proper query keys for cache management
 
 ## Troubleshooting
 
@@ -299,8 +300,9 @@ graph TB
 #### Verification Not Loading
 - **Check Authentication** - Ensure admin login is active
 - **Verify Permissions** - Confirm admin role assignment
-- **Clear Cache** - Refresh browser or clear session storage
+- **Clear Cache** - Refresh TanStack Query cache or clear browser storage
 - **Check Network** - Verify internet connectivity
+- **Query State** - Check TanStack Query DevTools for query status
 
 #### Search Not Working
 - **Check Search Term** - Ensure search term is valid
@@ -312,7 +314,8 @@ graph TB
 - **Reset Filters** - Clear all applied filters
 - **Check Date Range** - Ensure valid date ranges
 - **Verify Status** - Check verification status values
-- **Clear Cache** - Remove cached filter data
+- **Clear Cache** - Remove TanStack Query cached filter data
+- **Query Keys** - Verify query key consistency
 
 ### Error Handling
 
@@ -324,9 +327,10 @@ graph TB
 
 #### Search & Filter Errors
 - **Query Timeout** - Reduce search scope or filters
-- **Memory Issues** - Clear browser cache
+- **Memory Issues** - Clear TanStack Query cache
 - **Data Inconsistency** - Refresh verification data
-- **Cache Corruption** - Clear all cached data
+- **Cache Corruption** - Clear all TanStack Query cached data
+- **Query Key Issues** - Verify query key structure
 
 ---
 

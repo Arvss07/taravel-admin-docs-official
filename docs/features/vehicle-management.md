@@ -60,13 +60,14 @@ graph TB
         Del[Delete Vehicle Type]
     end
 
-    subgraph Store[Redux Store]
-        Slice[vehicle-types-slice]
+    subgraph State[State Management]
+        Redux[Redux Store - UI State]
+        TQ[TanStack Query - Server State]
     end
 
     subgraph Data[Data Sources]
         FS[Firestore Vehicles]
-        Cache[Session Storage Cache]
+        Cache[Query Cache]
     end
 
     VLP --> VTTable
@@ -75,9 +76,10 @@ graph TB
     VLP --> Edit
     VLP --> Del
 
-    VLP --> Slice
-    Slice --> FS
-    Slice --> Cache
+    VLP --> Redux
+    VLP --> TQ
+    TQ --> FS
+    TQ --> Cache
 ```
 
 ## Usage Guide
@@ -90,9 +92,18 @@ graph TB
 
 ## Troubleshooting
 
-- Not seeing updates? Use the refresh or clear browser session storage
-- Edits not saving? Check admin authentication
-- Missing records? Verify filters and search term
+- **Not seeing updates?** 
+  - Use the refresh or clear TanStack Query cache
+  - Check if data is cached with stale time
+  - Verify query invalidation after mutations
+- **Edits not saving?** 
+  - Check admin authentication
+  - Verify network connectivity
+  - Check mutation error handling
+- **Missing records?** 
+  - Verify filters and search term
+  - Check query parameters
+  - Ensure proper data loading state
 
 ---
 

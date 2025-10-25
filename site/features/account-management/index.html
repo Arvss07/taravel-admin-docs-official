@@ -13,14 +13,15 @@
         IndView[Individual Details]
     end
 
-    subgraph Store[Redux Store]
-        Slice[accounts-slice]
+    subgraph State[State Management]
+        Redux[Redux Store - UI State]
+        TQ[TanStack Query - Server State]
     end
 
     subgraph Data[Data Sources]
         FS[Firestore Accounts]
         VT[Vehicle Types]
-        Cache[Session Storage Cache]
+        Cache[Query Cache]
     end
 
     ALP --&gt; Table
@@ -31,10 +32,11 @@
     ALP --&gt; OrgView
     ALP --&gt; IndView
 
-    ALP --&gt; Slice
-    Slice --&gt; FS
-    Slice --&gt; VT
-    Slice --&gt; Cache</code></pre><h2 id="usage-guide">Usage Guide<a class="headerlink" href="#usage-guide" title="Permanent link">&para;</a></h2><h3 id="managing-accounts">Managing Accounts<a class="headerlink" href="#managing-accounts" title="Permanent link">&para;</a></h3><ol><li>Open Accounts in the sidebar</li><li>Adjust filters (status, account type, service type)</li><li>Use table search to find specific accounts</li><li>Use actions to View / Edit / Add Sub-Account / Delete</li></ol><h3 id="credential-handling">Credential Handling<a class="headerlink" href="#credential-handling" title="Permanent link">&para;</a></h3><ul><li>Use the Credential Modal to view generated credentials</li><li>Copy credentials securely; they may not be shown again</li></ul><h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2><ul><li>Accounts not updating? Refresh or clear browser session storage</li><li>Search not finding expected results? Check filters and search field</li><li>Permission errors? Ensure admin authentication and role</li></ul><hr><p><em>Next: Learn about <a href="../user-management/">User Management</a>.</em></p><script>
+    ALP --&gt; Redux
+    ALP --&gt; TQ
+    TQ --&gt; FS
+    TQ --&gt; VT
+    TQ --&gt; Cache</code></pre><h2 id="usage-guide">Usage Guide<a class="headerlink" href="#usage-guide" title="Permanent link">&para;</a></h2><h3 id="managing-accounts">Managing Accounts<a class="headerlink" href="#managing-accounts" title="Permanent link">&para;</a></h3><ol><li>Open Accounts in the sidebar</li><li>Adjust filters (status, account type, service type)</li><li>Use table search to find specific accounts</li><li>Use actions to View / Edit / Add Sub-Account / Delete</li></ol><h3 id="credential-handling">Credential Handling<a class="headerlink" href="#credential-handling" title="Permanent link">&para;</a></h3><ul><li>Use the Credential Modal to view generated credentials</li><li>Copy credentials securely; they may not be shown again</li></ul><h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2><ul><li><strong>Accounts not updating?</strong> </li><li>Check TanStack Query cache - data may be cached</li><li>Use browser DevTools to inspect query cache</li><li>Try manual refresh or clear query cache</li><li><strong>Search not finding expected results?</strong> </li><li>Check filters and search field</li><li>Verify query parameters are correct</li><li><strong>Permission errors?</strong> </li><li>Ensure admin authentication and role</li><li>Check Firebase security rules</li><li><strong>Slow loading?</strong></li><li>Check network tab for failed requests</li><li>Verify query keys are properly configured</li><li>Consider adjusting stale time settings</li></ul><hr><p><em>Next: Learn about <a href="../user-management/">User Management</a>.</em></p><script>
     // Add custom functionality here
     document.addEventListener('DOMContentLoaded', function() {
       // Add copy buttons to code blocks, but skip Mermaid to avoid rendering artifacts like "ECopy/CCopy"

@@ -66,14 +66,15 @@ graph TB
         IndView[Individual Details]
     end
 
-    subgraph Store[Redux Store]
-        Slice[accounts-slice]
+    subgraph State[State Management]
+        Redux[Redux Store - UI State]
+        TQ[TanStack Query - Server State]
     end
 
     subgraph Data[Data Sources]
         FS[Firestore Accounts]
         VT[Vehicle Types]
-        Cache[Session Storage Cache]
+        Cache[Query Cache]
     end
 
     ALP --> Table
@@ -84,10 +85,11 @@ graph TB
     ALP --> OrgView
     ALP --> IndView
 
-    ALP --> Slice
-    Slice --> FS
-    Slice --> VT
-    Slice --> Cache
+    ALP --> Redux
+    ALP --> TQ
+    TQ --> FS
+    TQ --> VT
+    TQ --> Cache
 ```
 
 ## Usage Guide
@@ -104,9 +106,20 @@ graph TB
 
 ## Troubleshooting
 
-- Accounts not updating? Refresh or clear browser session storage
-- Search not finding expected results? Check filters and search field
-- Permission errors? Ensure admin authentication and role
+- **Accounts not updating?** 
+  - Check TanStack Query cache - data may be cached
+  - Use browser DevTools to inspect query cache
+  - Try manual refresh or clear query cache
+- **Search not finding expected results?** 
+  - Check filters and search field
+  - Verify query parameters are correct
+- **Permission errors?** 
+  - Ensure admin authentication and role
+  - Check Firebase security rules
+- **Slow loading?**
+  - Check network tab for failed requests
+  - Verify query keys are properly configured
+  - Consider adjusting stale time settings
 
 ---
 

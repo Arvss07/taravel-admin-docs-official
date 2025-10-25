@@ -90,10 +90,11 @@ The Dashboard primarily focuses on **Read** operations, displaying real-time dat
 - **System Activity** - Fetched via `useSystemActivity` hook
 
 #### Data Refresh Operations
-- **Manual Refresh** - Force refresh all dashboard data
-- **Auto-refresh** - Automatic updates every 3 minutes
-- **Cache Management** - Session storage for performance optimization
-- **Error Recovery** - Retry mechanisms for failed requests
+- **Manual Refresh** - Force refresh all dashboard data using TanStack Query
+- **Auto-refresh** - Automatic updates every 3 minutes via query intervals
+- **Cache Management** - Intelligent caching with configurable stale times
+- **Error Recovery** - Built-in retry mechanisms and error boundaries
+- **Background Updates** - Automatic refetching on window focus and network reconnection
 
 ### Navigation Operations (Quick Actions)
 
@@ -119,12 +120,13 @@ graph TB
         RC[Recent Verifications Card]
     end
     
-    subgraph Hooks[Custom Hooks]
-        VSH[useVerificationStats]
-        SOH[useSystemOverview]
-        VEH[useVehicleStats]
-        ASH[useAccountStats]
-        SAH[useSystemActivity]
+    subgraph QueryHooks[TanStack Query Hooks]
+        VSH[useVerificationStatsQuery]
+        SOH[useSystemOverviewQuery]
+        VEH[useVehicleStatsQuery]
+        ASH[useAccountStatsQuery]
+        SAH[useSystemActivityQuery]
+        RVH[useRecentVerificationsQuery]
     end
     
     subgraph API[API Routes]
@@ -139,7 +141,6 @@ graph TB
         VT[Vehicle Types Collection]
     end
     
-    DP --> VSH
     DP --> SOC
     DP --> RC
     
@@ -148,10 +149,13 @@ graph TB
     SOC --> ASH
     SOC --> SAH
     
+    RC --> RVH
+    
     VSH --> VC
     VEH --> VT
     ASH --> AC
     SAH --> VH
+    RVH --> VC
     
     SOH --> SO
     
