@@ -72,16 +72,27 @@ This document provides a comprehensive overview of the technologies and tools us
     - Easy customization
     - Copy-paste components
 
+-   :material-store:{ .lg .middle } **TanStack Query**
+
+    ---
+
+    Powerful data synchronization for React
+    
+    - Intelligent caching
+    - Background refetching
+    - Optimistic updates
+    - Error handling and retries
+
 -   :material-store:{ .lg .middle } **Redux Toolkit**
 
     ---
 
-    Predictable state container
+    Predictable state container for UI state
     
-    - Centralized state management
+    - UI state management (modals, filters, pagination)
     - Time-travel debugging
     - Middleware support
-    - RTK Query for data fetching
+    - Simplified state updates
 
 -   :material-store:{ .lg .middle } **React Redux**
 

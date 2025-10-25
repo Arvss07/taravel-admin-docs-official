@@ -1,6 +1,6 @@
 # System Overview
 
-The Tara-Vel Admin system is built with a modern, scalable architecture that leverages Next.js, Firebase, and Redux to provide a robust administrative interface.
+The Tara-Vel Admin system is built with a modern, scalable architecture that leverages Next.js, Firebase, TanStack Query, and Redux to provide a robust administrative interface.
 
 ## High-Level Architecture
 
@@ -10,37 +10,40 @@ graph TB
         A[Admin Dashboard]
         B[Next.js App Router]
         C[React Components]
-        D[Redux Store]
+        D[TanStack Query]
+        E[Redux Store - UI State]
     end
     
     subgraph Auth["Authentication Layer"]
-        E[Firebase Auth]
-        F[Middleware]
-        G[Route Protection]
+        F[Firebase Auth]
+        G[Middleware]
+        H[Route Protection]
     end
     
     subgraph Data["Data Layer"]
-        H[Firestore Database]
-        I[Cloudinary]
+        I[Firestore Database]
+        J[Cloudinary]
     end
     
     subgraph API["API Layer"]
-        J[Next.js API Routes]
-        K[Firebase Admin SDK]
-        L[External APIs]
+        K[Next.js API Routes]
+        L[Firebase Admin SDK]
+        M[External APIs]
     end
     
     A --> B
     B --> C
     C --> D
-    D --> E
+    C --> E
+    D --> K
     E --> F
     F --> G
-    G --> J
-    J --> K
-    K --> H
-    K --> I
-    J --> L
+    G --> H
+    H --> K
+    K --> L
+    L --> I
+    L --> J
+    K --> M
 ```
 
 ## Core Components
@@ -77,32 +80,65 @@ src/components/
 
 ### State Management
 
-#### Redux Store Structure
+#### TanStack Query + Redux Architecture
+The application uses a hybrid state management approach:
+
+- **TanStack Query**: Handles all server state (data fetching, caching, synchronization)
+- **Redux**: Manages only UI state (modals, filters, pagination, selections)
+
+#### Redux Store Structure (UI State Only)
 ```typescript
 interface RootState {
   auth: AuthState;           // Authentication state
-  users: UsersState;         // User management
-  accounts: AccountsState;   // Account management
-  vehicles: VehiclesState;   // Vehicle management
-  verification: VerificationState; // ID verification
-  ui: UIState;              // UI state (modals, loading, etc.)
+  users: UsersState;         // UI state for user management
+  accounts: AccountsState;   // UI state for account management
+  vehicles: VehiclesState;   // UI state for vehicle management
+  verification: VerificationState; // UI state for ID verification
+  logs: LogsState;          // UI state for system logs
+  settings: SettingsState;  // UI state for settings
 }
+```
+
+#### TanStack Query Structure
+```typescript
+// Query keys for consistent caching
+const queryKeys = {
+  verification: {
+    all: ["verification"],
+    stats: () => ["verification", "stats"],
+    list: (filters) => ["verification", "list", filters],
+    detail: (id) => ["verification", "detail", id],
+  },
+  account: {
+    all: ["account"],
+    list: (filters) => ["account", "list", filters],
+    detail: (id) => ["account", "detail", id],
+  },
+  // ... other entities
+};
 ```
 
 #### State Flow
 ```mermaid
 sequenceDiagram
     participant C as Component
+    participant TQ as TanStack Query
     participant R as Redux Store
     participant A as API
     participant F as Firebase
     
-    C->>R: Dispatch Action
-    R->>A: API Call
+    C->>TQ: useQuery() / useMutation()
+    TQ->>A: API Call
     A->>F: Firebase Operation
     F-->>A: Response
-    A-->>R: Action Result
-    R->>C: State Update
+    A-->>TQ: Data
+    TQ->>TQ: Cache & Process
+    TQ-->>C: Return Data
+    
+    Note over C,R: UI State Management
+    C->>R: Dispatch UI Action
+    R->>R: Update UI State
+    R-->>C: State Update
     C->>C: Re-render
 ```
 
@@ -129,16 +165,23 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant C as Component
-    participant H as Hook
+    participant QH as Query Hook
+    participant QC as Query Client
     participant S as Service
     participant F as Firestore
     
-    C->>H: useData()
-    H->>S: fetchData()
-    S->>F: Query
-    F-->>S: Data
-    S-->>H: Processed Data
-    H-->>C: Return Data
+    C->>QH: useQuery(params)
+    QH->>QC: Check Cache
+    alt Cache Hit
+        QC-->>QH: Cached Data
+    else Cache Miss
+        QH->>S: fetchData()
+        S->>F: Query
+        F-->>S: Data
+        S-->>QH: Processed Data
+        QH->>QC: Update Cache
+    end
+    QH-->>C: Return Data
     C->>C: Render
 ```
 

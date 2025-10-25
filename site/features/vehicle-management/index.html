@@ -11,13 +11,14 @@
         Del[Delete Vehicle Type]
     end
 
-    subgraph Store[Redux Store]
-        Slice[vehicle-types-slice]
+    subgraph State[State Management]
+        Redux[Redux Store - UI State]
+        TQ[TanStack Query - Server State]
     end
 
     subgraph Data[Data Sources]
         FS[Firestore Vehicles]
-        Cache[Session Storage Cache]
+        Cache[Query Cache]
     end
 
     VLP --&gt; VTTable
@@ -26,9 +27,10 @@
     VLP --&gt; Edit
     VLP --&gt; Del
 
-    VLP --&gt; Slice
-    Slice --&gt; FS
-    Slice --&gt; Cache</code></pre><h2 id="usage-guide">Usage Guide<a class="headerlink" href="#usage-guide" title="Permanent link">&para;</a></h2><h3 id="managing-vehicle-types">Managing Vehicle Types<a class="headerlink" href="#managing-vehicle-types" title="Permanent link">&para;</a></h3><ol><li>Open Vehicles in the sidebar</li><li>Use search and filters to narrow results</li><li>Switch view (Table/Cards) as needed</li><li>Add/Edit/Delete via the corresponding actions</li></ol><h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2><ul><li>Not seeing updates? Use the refresh or clear browser session storage</li><li>Edits not saving? Check admin authentication</li><li>Missing records? Verify filters and search term</li></ul><hr><p><em>Next: Learn about <a href="../account-management/">Account Management</a>.</em></p><script>
+    VLP --&gt; Redux
+    VLP --&gt; TQ
+    TQ --&gt; FS
+    TQ --&gt; Cache</code></pre><h2 id="usage-guide">Usage Guide<a class="headerlink" href="#usage-guide" title="Permanent link">&para;</a></h2><h3 id="managing-vehicle-types">Managing Vehicle Types<a class="headerlink" href="#managing-vehicle-types" title="Permanent link">&para;</a></h3><ol><li>Open Vehicles in the sidebar</li><li>Use search and filters to narrow results</li><li>Switch view (Table/Cards) as needed</li><li>Add/Edit/Delete via the corresponding actions</li></ol><h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2><ul><li><strong>Not seeing updates?</strong> </li><li>Use the refresh or clear TanStack Query cache</li><li>Check if data is cached with stale time</li><li>Verify query invalidation after mutations</li><li><strong>Edits not saving?</strong> </li><li>Check admin authentication</li><li>Verify network connectivity</li><li>Check mutation error handling</li><li><strong>Missing records?</strong> </li><li>Verify filters and search term</li><li>Check query parameters</li><li>Ensure proper data loading state</li></ul><hr><p><em>Next: Learn about <a href="../account-management/">Account Management</a>.</em></p><script>
     // Add custom functionality here
     document.addEventListener('DOMContentLoaded', function() {
       // Add copy buttons to code blocks, but skip Mermaid to avoid rendering artifacts like "ECopy/CCopy"

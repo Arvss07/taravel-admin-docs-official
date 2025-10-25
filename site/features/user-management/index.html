@@ -11,8 +11,9 @@
         DeleteM[Delete User]
     end
 
-    subgraph Store[Redux Store]
-        USlice[users-slice]
+    subgraph State[State Management]
+        Redux[Redux Store - UI State]
+        TQ[TanStack Query - Server State]
     end
 
     subgraph API[API Routes]
@@ -28,11 +29,12 @@
     UP --&gt; ViewM
     UP --&gt; DeleteM
 
-    UP --&gt; USlice
-    USlice --&gt; UGET
-    USlice --&gt; UPOST
-    USlice --&gt; UPATCH
-    USlice --&gt; UDEL</code></pre><h2 id="usage-guide">Usage Guide<a class="headerlink" href="#usage-guide" title="Permanent link">&para;</a></h2><ol><li>Use search and filters to narrow users</li><li>Create new users via the Create modal</li><li>View details via the View modal</li><li>Block/Unblock from row actions (add reason for blocks)</li><li>Delete users with confirmation when needed</li></ol><h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2><ul><li>No results? Check filters and search query</li><li>Moderation failing? Verify admin permissions and retry</li><li>Pagination disabled? No previous/next page available</li></ul><hr><p><em>Next: Return to the <a href="../system-logs/">System Logs</a>.</em></p><script>
+    UP --&gt; Redux
+    UP --&gt; TQ
+    TQ --&gt; UGET
+    TQ --&gt; UPOST
+    TQ --&gt; UPATCH
+    TQ --&gt; UDEL</code></pre><h2 id="usage-guide">Usage Guide<a class="headerlink" href="#usage-guide" title="Permanent link">&para;</a></h2><ol><li>Use search and filters to narrow users</li><li>Create new users via the Create modal</li><li>View details via the View modal</li><li>Block/Unblock from row actions (add reason for blocks)</li><li>Delete users with confirmation when needed</li></ol><h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2><ul><li><strong>No results?</strong> </li><li>Check filters and search query</li><li>Verify TanStack Query cache isn't stale</li><li>Try refreshing the query cache</li><li><strong>Moderation failing?</strong> </li><li>Verify admin permissions and retry</li><li>Check network connectivity</li><li>Ensure proper authentication</li><li><strong>Pagination disabled?</strong> </li><li>No previous/next page available</li><li>Check query parameters</li><li>Verify data loading state</li></ul><hr><p><em>Next: Return to the <a href="../system-logs/">System Logs</a>.</em></p><script>
     // Add custom functionality here
     document.addEventListener('DOMContentLoaded', function() {
       // Add copy buttons to code blocks, but skip Mermaid to avoid rendering artifacts like "ECopy/CCopy"

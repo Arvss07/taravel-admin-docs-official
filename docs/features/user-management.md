@@ -62,8 +62,9 @@ graph TB
         DeleteM[Delete User]
     end
 
-    subgraph Store[Redux Store]
-        USlice[users-slice]
+    subgraph State[State Management]
+        Redux[Redux Store - UI State]
+        TQ[TanStack Query - Server State]
     end
 
     subgraph API[API Routes]
@@ -79,11 +80,12 @@ graph TB
     UP --> ViewM
     UP --> DeleteM
 
-    UP --> USlice
-    USlice --> UGET
-    USlice --> UPOST
-    USlice --> UPATCH
-    USlice --> UDEL
+    UP --> Redux
+    UP --> TQ
+    TQ --> UGET
+    TQ --> UPOST
+    TQ --> UPATCH
+    TQ --> UDEL
 ```
 
 ## Usage Guide
@@ -96,9 +98,18 @@ graph TB
 
 ## Troubleshooting
 
-- No results? Check filters and search query
-- Moderation failing? Verify admin permissions and retry
-- Pagination disabled? No previous/next page available
+- **No results?** 
+  - Check filters and search query
+  - Verify TanStack Query cache isn't stale
+  - Try refreshing the query cache
+- **Moderation failing?** 
+  - Verify admin permissions and retry
+  - Check network connectivity
+  - Ensure proper authentication
+- **Pagination disabled?** 
+  - No previous/next page available
+  - Check query parameters
+  - Verify data loading state
 
 ---
 
